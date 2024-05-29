@@ -1,7 +1,7 @@
-# Title of Your Final Project Here 
+# NBA Clutch Predictor
 ## INFO 201 "Foundational Skills for Data Science"
 
-Authors: Your names here
+Authors: Altti Koskinen
 
 
 For the Final Project -- Data Wrangling, add the following to this code repository:
