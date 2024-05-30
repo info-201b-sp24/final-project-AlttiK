@@ -21,6 +21,19 @@ Feel free to delete these instructions for your final README.md file and to make
 
 # Introduction
 
+<p>This project aims to analyze and understand NBA player and team clutch performance using data from:</p>
+      <ul>
+        <li>Clutch free throw attempts/percent made compared to overall free throw attempt/percent made</li>
+        <li>Clutch shots taken, made, and percentage</li>
+      </ul>
+      <p>Clutch moments in basketball games are high pressure and show how players deal with that pressure and use their skills. Some research questions include:</p>
+      <ul>
+        <li>How do clutch situations impact free throws and field goals made?</li>
+        <li>How much does a player's clutch factor play into winning games?</li>
+        <li>Does clutch shot efficiency rise with more attempts?</li>
+      </ul>
+      <p>These questions are important because they can enhance people's appreciation for players' skills when they matter most and how pressure impacts performance efficiency in general.</p>"
+
 
 
 # Conclusion / Summary Takeaways

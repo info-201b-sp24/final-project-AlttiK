@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    color: #1700a9;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+ul {
+    font-size: 16px;
+    line-height: 1.6;
+    list-style-type: disc;
+    margin-left: 20px;
+}

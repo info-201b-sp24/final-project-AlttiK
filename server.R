@@ -235,17 +235,7 @@ shinyServer(function(input, output) {
   
   
   
-  
-  
-  
-  
-  
-  
   # Chart 3
-  
-  # chart3Sample <- reactive({
-  #   clutch_data_filtered <- clutch_data %<% 
-  # })
   
   variable_options <- c("clutch free throw pct" = "ft_pct_clutch",
                         "total clutch attempts" = "total_clutch_shots",
@@ -270,12 +260,60 @@ shinyServer(function(input, output) {
     else if (selected_Var == "swg_made_per_game") {
       bar_width <- 0.002
     }
+    
     ggplot(clutch_data, aes_string(x = input$selectedVariable)) +
       geom_histogram(binwidth = bar_width, fill = "blue", color = "black", alpha = 0.7) +
       labs(title = paste("Player Spread Centered Around", selected_Var),
            x = selected_Var,
            y = "Player Frequency")
     
+  })
+  
+  output$clutchVariableSummary <- renderText({
+    ""
+  })
+  
+  
+  # Conclusion 
+  
+  output$conclusionIntroText <- renderText({
+    "Since the 1996-97 NBA season, 39903 clutch shots have been taken, with an average of 48% success percentage. When looking at that number compared to normal shots, it is obvious the affect of pressure has on players. Free throw percentage is also down a considerable percent. Surprisingly, harder shots are made very slightly more on average by 1.38 percent, though, the range for adjusted shot percent very high. Finally the best player based on impact is Kobe, this number is the \"difference between the team's win probability if the shot is made vs. if it was missed.\" Players with higher number have much higher impact on a team chances of winning."
+  })
+  
+  output$conclusionInsight1Text <- renderText({
+    "This graph shows players based on clutch shots attempted and their completion percentages. I chose this chart because it shows how some of the most efficient players in the league stand/stood in clutch situations as well as where players with the most clutch attempts stand"
+  })
+  
+  output$conclusionGraph1 <- renderPlot({
+    ggplot(clutch_data, aes(x = total_clutch_shots, y = pct_clutch, label = name)) +
+      geom_point(size = 3, alpha = 0.7) +
+      labs(title = "Clutch Shots Attempted vs. Shot Percentage by Player", 
+           x = "Clutch Shots Attempted", y = "Shot Percentage")
+  
+  })
+  
+  output$conclusionInsight2Text <- renderText({
+    "This histogram shows Where players fall for impact on a team. This number is found looking at the swing(affect on team win probability based on a shot going in or not) makes per game. This graph shows where most players in the league fall as well as some of the super stars who are able to make game deciding shots when necessary."
+  })
+  
+  output$conclusionGraph2 <- renderPlot({
+    ggplot(clutch_data, aes(x = swg_made_per_game)) +
+      geom_histogram(binwidth = 0.001, fill = "black", boundary = 0) +
+      scale_x_continuous(limits = c(0, 0.06)) +
+      labs(title = "Swing Made per Game per Player", x = "SWG per Game", y = "Frequency")
+  })
+  
+  output$conclusionInsight3Text <- renderText({
+    "This scatter plot displays how games played and experience does not end up having too much of an impact on making difficult shots in high pressure situations. \"Clutch\" players will fall into the positives for making difficult shots regardless of games played. The distribution is about equal for a positive or negative adjusted percentage.
+"
+  })
+  
+  output$conclusionGraph3 <- renderPlot({
+    ggplot(clutch_data, aes(x = pct_clutch_adjusted, y = gp_all)) +
+      geom_point(size = 3, alpha = 0.7) +
+      labs(title = "Adjusted Clutch Shot Percentage vs. Games Played",
+           x = "Number of Games Played (including playoffs)",
+           y = "Adjusted Clutch Shot Percentage")
   })
 
   # # CHART 1 WORK

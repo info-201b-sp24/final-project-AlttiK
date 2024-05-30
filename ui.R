@@ -2,7 +2,7 @@ library(shiny)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
-  
+  includeCSS("styles.css"),
   # Application title
   navbarPage( "NBA Clutch Predictor",
               tabPanel(
@@ -60,19 +60,28 @@ shinyUI(fluidPage(
                 sidebarLayout(
                   sidebarPanel(
                     uiOutput("multiSelector"),
+                    uiOutput("clutchVariableSummary")
                   ),
                   mainPanel(
                     plotOutput("variableSpecificPlayerGraph")
                   )
                 )
               ),
-              
+    
               tabPanel(
                 "Conclusion",
                 mainPanel(
                   h2("Conclusion"),
-                  uiOutput(""),
-                    
+                  uiOutput("conclusionIntroText"),
+                  h3("Insight 1:"),
+                  uiOutput("conclusionInsight1Text"),
+                  plotOutput("conclusionGraph1"),
+                  h3("Insight 2:"),
+                  uiOutput("conclusionInsight2Text"),
+                  plotOutput("conclusionGraph2"),
+                  h3("Insight 3:"),
+                  uiOutput("conclusionInsight3Text"),
+                  plotOutput("conclusionGraph3"),
                 )
               )
 
@@ -141,8 +150,5 @@ shinyUI(fluidPage(
               #     
               #   )
               # )
-              
-              
-              
   )
 ))
