@@ -30,16 +30,19 @@ Since the 1996-97 NBA season, 39903 clutch shots have been taken, with an averag
 Insight 1:
 
 The first notable insight found from this project was over time, the more clutch shots a player attempts, the more their average will trend toward 50%. The graph provided shows this trend, as players with more and more attempts converge toward 50%. It shows how varied players who don't attempt many shots are, players with less than 200 attempts fall into a large range between 30%-70%.
+
 ![Clutch Shot Pct Chart](./plot1.png)
 
 Insight 2:
 
 The second insight was on the overall impact of players and how most fall into the area of 0.008-0.016. This histogram visualizes where players fall for impact on a team. This number is found by looking at the swing (effect on team win probability based on a shot going in or not) made per game. The histogram is also right skew meaning most players fall in the height of the bell curve while the farther right you look the less and less players there are.
+
 ![Swing Per Game Chart](./plot2.png)
 
 Insight 3:
 
 The final insight I found was how games played, which essentially translates to experience, do not end up affecting how often a player can make more and more difficult clutch shots. This scatter plot displays players' games played and their adjusted clutch shot percentage, which is based on the difficulty of a shot. "Clutch" players end up falling into the positives for making difficult shots regardless of games played and only slightly compacts as the number of games played increases. The distribution is still about equal for a positive or negative adjusted percentage.
+
 ![Adjusted Clutch Shot Pct Chart](./plot3.png)
 
 Most Important Insight:
