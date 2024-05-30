@@ -23,9 +23,9 @@ shinyServer(function(input, output) {
       </ul>
       <p>Clutch moments in basketball games are high pressure and show how players deal with that pressure and use their skills. Some research questions include:</p>
       <ul>
-        <li>How do clutch situations impact free throws and field goals made?</li>
-        <li>How much does a player's clutch factor play into winning games?</li>
         <li>Does clutch shot efficiency rise with more attempts?</li>
+        <li>How much does a player's clutch factor play into winning games?</li>
+        <li>How do clutch situations impact free throws and field goals made?</li>
       </ul>
       <p>These questions are important because they can enhance people's appreciation for players' skills when they matter most and how pressure impacts performance efficiency in general.</p>"
     )
@@ -315,151 +315,6 @@ shinyServer(function(input, output) {
            x = "Number of Games Played (including playoffs)",
            y = "Adjusted Clutch Shot Percentage")
   })
-
-  # # CHART 1 WORK
-  # sample <- reactive({
-  #   eg <-  data %>%
-  #     filter(year == input$year) %>%
-  #     filter(agegrp == input$age) %>%
-  #     filter(outname == input$category)
-  # 
-  #   validate(
-  #     need(nrow(eg) != 0, "Data not available. Please change age group or year.")
-  #   )
-  # 
-  #   data %>%
-  #     filter(year == input$year) %>%
-  #     filter(agegrp == input$age) %>%
-  #     filter(outname == input$category) %>%
-  #     left_join(us, data, by = "region")
-  # 
-  # })
-  # output$distPlot <- renderPlot({
-  # 
-  #   ggplot(sample(), aes(x = long, y = lat, group=group, fill = BSAE)) +
-  #     geom_polygon(col = "grey") +
-  #     ggtitle(str_to_title(paste(input$category, "in the USA in", input$year))) +
-  #     theme(axis.title.x=element_blank(),
-  #           axis.text.x=element_blank(),
-  #           axis.ticks.y=element_blank(),
-  #           axis.title.y=element_blank(),
-  #           axis.text.y=element_blank()) +
-  #     coord_quickmap()
-  # 
-  # 
-  # })
-  # 
-  # output$agegrp <- renderUI ({
-  #   radioButtons("age", label = h3("Select Age Group"), 
-  #                choices = list("12 or older" = 0, "12 to 17" = 1, "18 to 25" = 2,
-  #                               "26 or older" = 3, "18 or older" = 4), 
-  #                selected = 4)
-  # })
-  # 
-  # output$year <- renderUI({
-  #   sliderInput("year", label = h3("Year"), min = 1999, 
-  #               max = 2018, value = 2018, step = 1)
-  # })
-  # 
-  # output$category <- renderUI({
-  #   selectInput("category", label = h3("Drug Usage or Mental Health Category"),
-  #               choices = unique(data$outname), 
-  #               selected = "alcohol use in the past month")
-  # })
-  # 
-  # output$summary1 <- renderText ({
-  #   "This chart shows drug usage by the state for a specified drug, year, 
-  #       and age group. Ideally, this could better inform lawmakers and 
-  #       institutions about where more information on drugs is most relevant and 
-  #       inform healthcare providers in some states about what drug-related 
-  #       topics they should cover with their patients and at what ages."
-  # })
-  # 
-  # # CHART 3 WORK
-  # output$substance <- renderUI ({
-  #   radioButtons("substance", label = h3("Select Substance Type"), 
-  #                choices = list("Cigarettes" = "CIGTRY", "Alchohol"= "ALCTRY", "Marijuana" = "MJAGE",
-  #                               "Cocaine" = "COCAGE", "Heroin" = "HERAGE", "Hallucinogens" = "HALLUCAGE",
-  #                               "LSD" = "LSDAGE", "Inhalants" = "INHALAGE"),
-  #                selected = "CIGTRY")
-  # })
-  # 
-  # output$year2 <- renderUI({
-  #   sliderInput("year2", label = h3("Year"), min = 2015, 
-  #               max = 2019, value = 2019, step = 1)
-  # })
-  # 
-  # 
-  # barSample <- reactive({
-  #   barDf %>%
-  #     filter(Year == input$year2) %>%
-  #     filter(substance == input$substance) %>%
-  #     filter(age < 80) 
-  #   
-  #   
-  # })
-  # 
-  # output$barPlot <- renderPlot({
-  #   ggplot(barSample(), aes(x = age)) +
-  #     geom_bar(fill = "grey")
-  # })
-  # 
-  # output$summary3 <- renderText ({
-  #   "This bar chart, which purely focuses on age and substance type, would 
-  #       be most useful for healthcare providers and academic institutions. The 
-  #       chart could allow these groups to better understand the demographics 
-  #       they are working with and the information most relevant to that group. 
-  #       For example, in recent years, inhalants have skewed much younger than 
-  #       cocaine. "
-  # })
-  # 
-  # # CHART 2 WORK
-  # lineData <- reactive({
-  #   eg <-  data %>%
-  #     filter(agegrp == input$age2) %>%
-  #     filter(outname == input$category2) %>%
-  #     filter(region == "national")
-  #   
-  #   validate(
-  #     need(nrow(eg) != 0, "Data not available. Please change age group or year.")
-  #   )
-  #   
-  #   data %>%
-  #     filter(agegrp == input$age2) %>%
-  #     filter(outname == input$category2) %>%
-  #     filter(region == "national")
-  #   
-  # })
-  # 
-  # #chart 2 line plot output
-  # output$linePlot <- renderPlot({
-  #   group <- switch((strtoi(input$age2) + 1), "12 or older", "12 to 17", "18 to 25",
-  #                   "26 or older", "18 or older")
-  #   
-  #   ggplot(lineData(), aes(x = year, y = BSAE, color = group)) +
-  #     geom_line() +
-  #     geom_point() +
-  #     labs(title = "Drugs BSAE from 1999-2019 for different Age Groups", 
-  #          x = "Year",
-  #          y = "BSAE",
-  #          color = "Age Group"
-  #     ) 
-  #   
-  #   
-  # })
-  # 
-  # output$category2 <- renderUI({
-  #   selectInput("category2", label = h3("Drug Usage or Mental Health Category"),
-  #               choices = unique(data$outname), 
-  #               selected = "alcohol use in the past month")
-  # })
-  # 
-  # output$agegrp2 <- renderUI ({
-  #   radioButtons("age2", label = h3("Select Age Group"), 
-  #                choices = list("12 or older" = 0, "12 to 17" = 1, "18 to 25" = 2,
-  #                               "26 or older" = 3, "18 or older" = 4), 
-  #                selected = 4)
-  # })
   # 
   # output$summary2 <- renderText ({
   #   "This chart, which shows drug usage by an age group over time (meaning 
