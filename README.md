@@ -6,6 +6,8 @@ Authors: Altti Koskinen
 
 [Shiny App Link](https://alttik.shinyapps.io/final-project-alttik/)
 
+Note: If there are errors, refresh/reopen the link and it should work
+
 # Introduction
 
 <p>This project aims to analyze and understand NBA player and team clutch performance using data from:</p>
