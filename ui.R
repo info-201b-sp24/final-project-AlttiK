@@ -40,20 +40,41 @@ shinyUI(fluidPage(
                     actionButton("addButton", "Add Selected")
                   ),
                   mainPanel(
+                    actionButton("calculateButton", "Predict Winner"),
                     plotOutput("teamWinPercentagePlot")
                   )
                 ),
                 sidebarLayout(
                   sidebarPanel(
                     "Created Teams",
-                      dataTableOutput("addedTable"),
-                    
+                    dataTableOutput("addedTable"),
                   ),
                   mainPanel(
-                    
+                    uiOutput("winPredictorSummary")
                   )
                 )
               ),
+              
+              tabPanel(
+                "Cutch Stat Checker",
+                sidebarLayout(
+                  sidebarPanel(
+                    uiOutput("multiSelector"),
+                  ),
+                  mainPanel(
+                    plotOutput("variableSpecificPlayerGraph")
+                  )
+                )
+              ),
+              
+              tabPanel(
+                "Conclusion",
+                mainPanel(
+                  h2("Conclusion"),
+                  uiOutput(""),
+                    
+                )
+              )
 
               # tabPanel(# Sidebar with a slider input for number of bins
               #   "Player Clutch Predictor",

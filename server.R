@@ -7,12 +7,7 @@ library(DT)
 shinyServer(function(input, output) {
   
   clutch_data <- read_csv("nba_clutch.csv")
-  
-  addedDataTeam1 <- reactiveVal()
-  
-  addedDataTeam2 <- reactiveVal()
-  
-  
+
   
   
   
@@ -143,6 +138,11 @@ shinyServer(function(input, output) {
   
   
   # Chart 2
+  
+  addedDataTeam1 <- reactiveVal()
+  
+  addedDataTeam2 <- reactiveVal()
+  
   output$searchInput <- renderUI({
     textInput("searchInput", "Enter a Player Name:")
   })
@@ -187,9 +187,50 @@ shinyServer(function(input, output) {
     }
   })
   
-  output$teamWinPercentagePlot <- renderPlot({
+  observeEvent(input$calculateButton, {
     
+    team1_data <- addedDataTeam1()
+    team2_data <- addedDataTeam2()
+    
+    tryCatch({ 
+    team1_total_swg <- team1_data %>%
+      summarise(total_swg = sum(swg_made_per_game)) %>% pull(total_swg)
+    team2_total_swg <- team2_data %>%
+      summarise(total_swg = sum(swg_made_per_game)) %>% pull(total_swg)
+    
+    total_swg_sum <- team1_total_swg + team2_total_swg
+    team1_percentage <- team1_total_swg / total_swg_sum * 100
+    team2_percentage <- team2_total_swg / total_swg_sum * 100
+    
+    team_data <- data.frame(
+      Team = c("Team 1", "Team 2"),
+      Percentage = c(team1_percentage, team2_percentage)
+    )
+
+    output$teamWinPercentagePlot <- renderPlot({
+      ggplot(team_data, aes(x = "", y = Percentage, fill = Team)) +
+        geom_bar(stat = "identity", position = "stack") +
+        geom_text(aes(label = paste0(round(Percentage, 1), "%")), 
+                  position = position_stack(vjust = 0.5)) +
+        labs(title = "Win Chance based on Swing Made Per Game",
+             x = NULL,
+             y = "Win Percentage") +
+        coord_flip() +
+        scale_fill_manual(values = c("Team 1" = "red", "Team 2" = "blue"))
+    })
+    
+    },
+    error = function(e) {
+      NULL
+      
+    })
   })
+  
+  output$winPredictorSummary <- renderText({
+    "This predictor uses each players swing made per game to calculate their impact on any given game. Swing is the affect of a teams win probability if a player makes a clutch shot or not. A player's specific Swing made per game is essentially a players impact on a teams win probability. By adding players to 2 teams, this predictor shows the chances of which team will win.
+    Note: Only players who have attempted clutch shots will have a Swing made per game."
+  })
+  
   
   
   
@@ -202,7 +243,40 @@ shinyServer(function(input, output) {
   
   # Chart 3
   
+  # chart3Sample <- reactive({
+  #   clutch_data_filtered <- clutch_data %<% 
+  # })
   
+  variable_options <- c("clutch free throw pct" = "ft_pct_clutch",
+                        "total clutch attempts" = "total_clutch_shots",
+                        "clutch shot pct" = "pct_clutch",
+                        "clutch shot pct difficulty adjusted" = "pct_clutch_adjusted",
+                        "swing made per game" = "swg_made_per_game")
+   
+  output$multiSelector <- renderUI({
+    selectInput("selectedVariable", "Choose a variable to center the chart around:",
+                choices = variable_options, selected = variable_options[0])
+  })
+   
+  output$variableSpecificPlayerGraph <- renderPlot({
+    
+    selected_Var <- input$selectedVariable
+    
+    bar_width <- 5
+    
+    if (selected_Var == "total_clutch_shots") {
+      bar_width <- 50
+    }
+    else if (selected_Var == "swg_made_per_game") {
+      bar_width <- 0.002
+    }
+    ggplot(clutch_data, aes_string(x = input$selectedVariable)) +
+      geom_histogram(binwidth = bar_width, fill = "blue", color = "black", alpha = 0.7) +
+      labs(title = paste("Player Spread Centered Around", selected_Var),
+           x = selected_Var,
+           y = "Player Frequency")
+    
+  })
 
   # # CHART 1 WORK
   # sample <- reactive({
