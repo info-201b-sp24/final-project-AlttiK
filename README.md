@@ -1,4 +1,5 @@
 # NBA Clutch Predictor
+
 ## INFO 201 "Foundational Skills for Data Science"
 
 Authors: Altti Koskinen
