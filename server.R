@@ -10,6 +10,7 @@ shinyServer(function(input, output) {
 
   
   # INTRODUCTION
+  
   output$introduction <- renderText({
     #
     HTML(
@@ -78,9 +79,7 @@ shinyServer(function(input, output) {
   userSample <- reactive({
     clutch_data_filtered <- clutch_data %>% filter(pct_clutch >= input$shotPercentage)
     
-    validate(
-      need(nrow(clutch_data_filtered) != 0, "No players found with given shot percentage")
-    )
+    validate(need(nrow(clutch_data_filtered) != 0, "No players found with given shot percentage"))
     
     clutch_data_filtered
   })
@@ -105,13 +104,13 @@ shinyServer(function(input, output) {
         geom_point(size = 3, alpha = 0.7) +
         geom_text(vjust = -0.75, size = 3) +
         labs(title = paste0("Player Clutch Attempts VS Shot Percentage above ", input$shotPercentage, "%"),
-             x = "Attempts",
-             y = "Shot Percentage")
+        x = "Attempts",
+        y = "Shot Percentage")
     }
       
   })
   
-  # List of PLayers
+  # List of Players
   output$playerList <- renderDataTable({
     data.frame(userSample()[, c("name", "total_clutch_shots", "pct_clutch")])
   })
@@ -145,10 +144,12 @@ shinyServer(function(input, output) {
     }
   })
   
+  # Show current search
   output$filteredTable <- renderDataTable({
     datatable(filteredData()[, c("name")], options = list(scrollY = "200px", paging = FALSE))
   })
   
+  # Add to teams
   observeEvent(input$addButton, {
     selected_team <- input$teamSelector
     selected_rows <- input$filteredTable_rows_selected
@@ -166,6 +167,7 @@ shinyServer(function(input, output) {
     }
   })
   
+  # Show current selected Team
   output$addedTable <- renderDT({
     selected_team <- input$teamSelector
     if (selected_team == "team1") {
@@ -176,6 +178,7 @@ shinyServer(function(input, output) {
     }
   })
   
+  # Calcualate win percentages
   observeEvent(input$calculateButton, {
     
     team1_data <- addedDataTeam1()
@@ -210,6 +213,7 @@ shinyServer(function(input, output) {
     
     },
     error = function(e) {
+      #Crashes if there are no players in a team so try catch just ignores when it errors
       NULL
       
     })
@@ -232,11 +236,13 @@ shinyServer(function(input, output) {
                         "clutch shot pct difficulty adjusted" = "pct_clutch_adjusted",
                         "swing made per game" = "swg_made_per_game")
    
+  # options
   output$multiSelector <- renderUI({
     selectInput("selectedVariable", "Choose a variable to center the chart around:",
                 choices = variable_options, selected = variable_options[0])
   })
    
+  # show graph from selected options
   output$variableSpecificPlayerGraph <- renderPlot({
     
     selected_Var <- input$selectedVariable

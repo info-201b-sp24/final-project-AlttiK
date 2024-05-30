@@ -5,6 +5,6 @@ account: alttik
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12094256
-bundleId: 8677631
+bundleId: 8677662
 url: https://alttik.shinyapps.io/final-project-alttik/
 version: 1
