@@ -9,8 +9,6 @@ shinyServer(function(input, output) {
   clutch_data <- read_csv("nba_clutch.csv")
 
   
-  
-  
   # INTRODUCTION
   output$introduction <- renderText({
     #
@@ -42,7 +40,7 @@ shinyServer(function(input, output) {
   output$dataSetInfo <- renderText({
     HTML("
         <h3>Data Set Information</h3>
-        <p><strong>Where did you find the data?</strong></p>
+        <p><strong>Link to Data Set used</strong></p>
         <p><a href='https://github.com/the-pudding/data/tree/master/clutch' target='_blank'>https://github.com/the-pudding/data/tree/master/clutch</a></p>
         
         <p><strong>Who collected the data?</strong></p>
@@ -54,16 +52,7 @@ shinyServer(function(input, output) {
         <p><strong>Why was the data collected?</strong></p>
         <p>To quantify clutchness in a number.</p>
         
-        <p><strong>How many observations (rows) are in your data?</strong></p>
-        <p>There are 288 observations in the data set.</p>
-        
-        <p><strong>How many features (columns) are in the data?</strong></p>
-        <p>There are 11 features in the data set.</p>
-        
-        <p><strong>What, if any, ethical questions or questions of power do you need to consider when working with this data?</strong></p>
-        <p>There does not seem to be any questions of power to consider.</p>
-        
-        <p><strong>What are possible limitations or problems with this data? (at least 200 words)</strong></p>
+        <p><strong>What are possible limitations or problems with this data?</strong></p>
         <p>
             Some possible limitations with this data set could be exactly what defines a clutch shot,
             for example, how many possessions back still count as well as how much time left still counts.
@@ -270,18 +259,23 @@ shinyServer(function(input, output) {
   })
   
   output$clutchVariableSummary <- renderText({
-    ""
+    HTML("<p>This chart will display a histogram showing where all players in the data set fall in frequency for each variable selected. </p>
+    <p><Strong>Clutch free throw pct </Strong>is a players free throw percentage in high pressure clutch situations.</p>
+    <p><Strong>Total clutch attempts </Strong>is how many times a player has attempted a clutch shot or clutch free throw.</p>
+    <p><Strong>Clutch shot pct </Strong>is a players percentage for clutch shots in general.</p>
+    <p><Strong>clutch shot pct difficulty adjusted </Strong>has the players clutch shot percentage adjusted for how difficult each shot was.</p>
+    <p><Strong>Swing made per game</Strong> is a players impact on the game, more specifically, how many clutch shots a player makes that affects a teams win probablility.</p>")
   })
   
   
   # Conclusion 
   
   output$conclusionIntroText <- renderText({
-    "Since the 1996-97 NBA season, 39903 clutch shots have been taken, with an average of 48% success percentage. When looking at that number compared to normal shots, it is obvious the affect of pressure has on players. Free throw percentage is also down a considerable percent. Surprisingly, harder shots are made very slightly more on average by 1.38 percent, though, the range for adjusted shot percent very high. Finally the best player based on impact is Kobe, this number is the \"difference between the team's win probability if the shot is made vs. if it was missed.\" Players with higher number have much higher impact on a team chances of winning."
+    "Since the 1996-97 NBA season, 39903 clutch shots have been taken, with an average of 48% success percentage. When looking at that number compared to normal shots, it is obvious the affect of pressure has on players. Free throw percentage is also down a considerable percent. Surprisingly, harder shots are made very slightly more on average by 1.38 percent, though, the range for adjusted shot percent very high. Finally the best player based on impact is Kobe, this number is the \"difference between the team's win probability if the shot is made vs. if it was missed.\" Players with higher number have much higher impact on a team chances of winning. From this project there were a couple important insights that I will go over here."
   })
   
   output$conclusionInsight1Text <- renderText({
-    "This graph shows players based on clutch shots attempted and their completion percentages. I chose this chart because it shows how some of the most efficient players in the league stand/stood in clutch situations as well as where players with the most clutch attempts stand"
+    "The first notable insight found from this project was over time, the more clutch shots a player attempts, their average will trend towards 50%. The graph provided shows this trend, as players with more and more attempts converge toward 50%. Shows how varied players who don't attempt many shots are, players with less than 200 attempts fall into a large range between 30%-70%."
   })
   
   output$conclusionGraph1 <- renderPlot({
@@ -293,7 +287,7 @@ shinyServer(function(input, output) {
   })
   
   output$conclusionInsight2Text <- renderText({
-    "This histogram shows Where players fall for impact on a team. This number is found looking at the swing(affect on team win probability based on a shot going in or not) makes per game. This graph shows where most players in the league fall as well as some of the super stars who are able to make game deciding shots when necessary."
+    "The second insight was on the overall impact of players and how most fall into the area of 0.008-0.016. This histogram visualizes where players fall for impact on a team. This number is found looking at the swing(affect on team win probability based on a shot going in or not) makes per game. The histogram is also right skew meaning most players fall in the height of the bell curve while the farther right you look the less and less players there are. "
   })
   
   output$conclusionGraph2 <- renderPlot({
@@ -304,7 +298,7 @@ shinyServer(function(input, output) {
   })
   
   output$conclusionInsight3Text <- renderText({
-    "This scatter plot displays how games played and experience does not end up having too much of an impact on making difficult shots in high pressure situations. \"Clutch\" players will fall into the positives for making difficult shots regardless of games played. The distribution is about equal for a positive or negative adjusted percentage.
+    "The final insight I found was how games played, which essentially translates to experience, does not end up affecting how often a player can make more and more difficult clutch shots. This scatter plot displays players games played and their adjusted clutch shot percentage, which is based on difficulty of a shot. \"Clutch\" players end up falling into the positives for making difficult shots regardless of games played and only slightly compacts as the number of games played increases. The distribution is still about equal for a positive or negative adjusted percentage.
 "
   })
   
@@ -312,9 +306,18 @@ shinyServer(function(input, output) {
     ggplot(clutch_data, aes(x = pct_clutch_adjusted, y = gp_all)) +
       geom_point(size = 3, alpha = 0.7) +
       labs(title = "Adjusted Clutch Shot Percentage vs. Games Played",
-           x = "Number of Games Played (including playoffs)",
-           y = "Adjusted Clutch Shot Percentage")
+           x = "Adjusted Clutch Shot Percentage",
+           y = "Number of Games Played (including playoffs)")
   })
+  
+  output$conclusionImportantInsightText <- renderText({
+    "From these 3 key insights, I see the first one the most improtant as it shows that experience does have an important affect on if a player can make high pressure shots. While it ends up being closer to 50/50, the high variability in low attempts makes less experienced clutch players from being much more volitile/unpredictable."
+  })
+  
+  output$conclusionBroaderImplications <- renderText({
+    "The broader implications can be used to decide who takes cruicial game winning shots when the time comes. Beyond raw talent, the ability to thrive under pressure emerges as a defining trait of elite athletes. This trait can be improved throuh expeience but from this projects insights, many playershave more inherient \"clutchness\" compared to others. Coaches and team management must weigh this intangible quality alongside conventional metrics when crafting game plans and roster decisions."
+  })
+  
   # 
   # output$summary2 <- renderText ({
   #   "This chart, which shows drug usage by an age group over time (meaning 

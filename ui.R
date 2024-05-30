@@ -29,7 +29,7 @@ shinyUI(fluidPage(
               ),
               
               tabPanel(
-                "Win Predictor",
+                "Clutch Win Predictor",
                 sidebarLayout(
                   sidebarPanel(
                     uiOutput("searchInput"),
@@ -56,7 +56,7 @@ shinyUI(fluidPage(
               ),
               
               tabPanel(
-                "Cutch Stat Checker",
+                "Stat Frequency",
                 sidebarLayout(
                   sidebarPanel(
                     uiOutput("multiSelector"),
@@ -82,7 +82,11 @@ shinyUI(fluidPage(
                   h3("Insight 3:"),
                   uiOutput("conclusionInsight3Text"),
                   plotOutput("conclusionGraph3"),
+                  h3("Most Important Insight:"),
+                  uiOutput("conclusionImportantInsightText"),
+                  h3("Broader Implications:"),
+                  uiOutput("conclusionBroaderImplications")
                 )
               )
-          )
+   )
 ))
