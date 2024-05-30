@@ -46,7 +46,7 @@ shinyUI(fluidPage(
                 sidebarLayout(
                   sidebarPanel(
                     "Created Teams",
-                    dataTableOutput("addedTable"),
+                    dataTableOutput("addedTable")
                   ),
                   mainPanel(
                     uiOutput("winPredictorSummary")
