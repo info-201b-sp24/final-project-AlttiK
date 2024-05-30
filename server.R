@@ -268,6 +268,9 @@ shinyServer(function(input, output) {
   })
   
   
+  
+  
+  
   # Conclusion 
   
   output$conclusionIntroText <- renderText({
@@ -317,95 +320,5 @@ shinyServer(function(input, output) {
   output$conclusionBroaderImplications <- renderText({
     "The broader implications can be used to decide who takes cruicial game winning shots when the time comes. Beyond raw talent, the ability to thrive under pressure emerges as a defining trait of elite athletes. This trait can be improved throuh expeience but from this projects insights, many playershave more inherient \"clutchness\" compared to others. Coaches and team management must weigh this intangible quality alongside conventional metrics when crafting game plans and roster decisions."
   })
-  
-  # 
-  # output$summary2 <- renderText ({
-  #   "This chart, which shows drug usage by an age group over time (meaning 
-  #       the number of people in a given age group who used a specified drug for 
-  #       a given time), might help policymakers better understand the impact 
-  #       that their policies and messaging have had on drug usage. This also 
-  #       shows various trends for certain drugs over time, such as with marijuana 
-  #       which has seen a dramatic rise in the past decade. This information
-  #       would be useful for healthcare providers trying to better understand 
-  #       the demographics whom they serve."
-  # })
-  # # CONCLUSION
-  # output$notableinsightone <- renderText({
-  #   "One notable insight discovered in our project was that the average age 
-  #       when first using for hard subtances such as cocaine, heroin, LSD, and 
-  #       hallucinogens is around 20 years old. The average 
-  #       age stayed consistent from 2015-2019. When choosing the different 
-  #       substances and changing the year you can see how the graphs are
-  #       positively skewed." })
-  # 
-  # output$graphImage1 <- renderImage({
-  #   filename <- normalizePath(file.path('cocaineUse.png'))
-  #   list(src = filename,
-  #        width = 600, height = 300,
-  #        alt = paste("Graph_1", input$n))
-  # }, deleteFile = FALSE)
-  # 
-  # output$graphImage2 <- renderImage({
-  #   filename <- normalizePath(file.path('mentalHealth.png'))
-  #   list(src = filename,
-  #        width = 600, height = 300,
-  #        alt = paste("Graph_2", input$n))
-  # }, deleteFile = FALSE)
-  # 
-  # output$cocaine <- renderImage({
-  #   filename <- normalizePath(file.path('cocaine.png'))
-  #   list(src = filename,
-  #        width = 600, height = 300,
-  #        alt = paste("cocaine", input$n))
-  # }, deleteFile = FALSE)
-  # 
-  # output$lsd <- renderImage({
-  #   filename <- normalizePath(file.path('lsd.png'))
-  #   list(src = filename,
-  #        width = 600, height = 300,
-  #        alt = paste("lsd", input$n))
-  # }, deleteFile = FALSE)
-  # 
-  # output$heroin <- renderImage({
-  #   filename <- normalizePath(file.path('heroin.png'))
-  #   list(src = filename,
-  #        width = 600, height = 300,
-  #        alt = paste("Gheroin", input$n))
-  # }, deleteFile = FALSE)
-  # 
-  # output$hallucinogin <- renderImage({
-  #   filename <- normalizePath(file.path('hallucinogin.png'))
-  #   list(src = filename,
-  #        width = 600, height = 300,
-  #        alt = paste("hallucinogin", input$n))
-  # }, deleteFile = FALSE)
-  # 
-  # output$notableinsighttwo <- renderText({
-  #   "The second notable insight discovered in our project 
-  #       was that cocaine usage and mental health services received for the age 
-  #       group 18 and older both have a postive trend line from 2010-2019. 
-  #       While we cannot assume directly that the two are correlated,
-  #       it is interesting to see how more people are getting 
-  #       mental health services and that more people are also using cocaine."
-  # })
-  # 
-  # output$broaderandquality <- renderText({
-  #   "The broader implications of the insight show that 
-  #       most people start to experiment with hard drugs is around 
-  #       the age of 20. This could be due to easier access in college and having 
-  #       more financial independence. The quality of the data 
-  #       was not perfect as there were gaps for certain years regarding the Drug
-  #       Misuse and the Mental Health graph. There were also some years of 
-  #       data not available for the Drug Use Rate Over Time by Age Group. 
-  #       The data was also collected by offering a $30 incentive to participants. 
-  #       This makes the results biased towards people of lower income versus 
-  #       people of higher income that would not care too much about a 
-  #       $30 incentive. An idea to advance this project in the 
-  #       future would be to compare drug usage in states based on income."
-  #   
-  #   
-  #   
-  # })
-  
   
 })

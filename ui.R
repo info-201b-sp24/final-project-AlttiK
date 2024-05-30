@@ -1,9 +1,8 @@
 library(shiny)
 
-# Define UI for application that draws a histogram
 shinyUI(fluidPage(
   includeCSS("styles.css"),
-  # Application title
+
   navbarPage( "NBA Clutch Predictor",
               tabPanel(
                 "Introduction",
